@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ProductController;
 
 
 Route::get('/', function () {
@@ -14,6 +15,9 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+Route::post('/produkty', [ProductController::class, 'store'])->name('produkty.create');
+Route::delete('/produkty/{id}', [ProductController::class, 'destroy'])->name('produkty.destroy');
+Route::get('/produkty/{id}/edit', [ProductController::class, 'edit'])->name('produkty.edit');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
