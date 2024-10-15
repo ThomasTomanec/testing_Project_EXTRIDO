@@ -1,40 +1,97 @@
 <h3 class="text-lg font-semibold">Seznam produktů</h3>
-                    <table class="min-w-full mt-4 border border-gray-300">
-                        <thead>
-                            <tr class="bg-gray-200">
-                                <th class="border border-gray-300 px-4 py-2">kod</th>
-                                <th class="border border-gray-300 px-4 py-2">Název produktu</th>
-                                <th class="border border-gray-300 px-4 py-2">Značka</th>
-                                <th class="border border-gray-300 px-4 py-2">Materiál</th>
-                                <th class="border border-gray-300 px-4 py-2">Cena</th>
-                                <th class="border border-gray-300 px-4 py-2">Popis produktu</th>
-                                <th class="border border-gray-300 px-4 py-2">Akce</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-    @if(empty($produkty) || $produkty->isEmpty())
+<table class="min-w-full mt-4 border border-gray-300">
+    <thead>
+        <tr class="bg-gray-200">
+            <th class="border border-gray-300 px-4 py-2">Kód</th>
+            <th class="border border-gray-300 px-4 py-2">Název produktu</th>
+            <th class="border border-gray-300 px-4 py-2">Značka</th>
+            <th class="border border-gray-300 px-4 py-2">Materiál</th>
+            <th class="border border-gray-300 px-4 py-2">Cena</th>
+            <th class="border border-gray-300 px-4 py-2">Popis produktu</th>
+            <th class="border border-gray-300 px-4 py-2">Akce</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if(empty($produkty) || $produkty->isEmpty())
         <tr>
             <td colspan="7" class="text-center border border-gray-300 px-4 py-2">Žádné produkty nebyly přidány.</td>
         </tr>
-    @else
+        @else
         @foreach($produkty as $produkt)
-            <tr>
-                <td class="border border-gray-300 px-4 py-2">{{ $produkt->kod }}</td>
-                <td class="border border-gray-300 px-4 py-2">{{ $produkt->nazev }}</td>
-                <td class="border border-gray-300 px-4 py-2">{{ $produkt->znacka->nazev ?? 'Neznámá značka' }}</td>
-                <td class="border border-gray-300 px-4 py-2">{{ $produkt->material->nazev ?? 'Neznámý materiál' }}</td>
-                <td class="border border-gray-300 px-4 py-2">{{ $produkt->cena }}</td>
-                <td class="border border-gray-300 px-4 py-2">{{ $produkt->description }}</td>
-                <form method="POST" action="{{ route('produkty.destroy', $produkt->id) }}"> 
+        <tr id="row-{{ $produkt->id }}">
+            <td class="border border-gray-300 px-4 py-2">{{ $produkt->kod }}</td>
+            <td class="border border-gray-300 px-4 py-2">{{ $produkt->nazev }}</td>
+            <td class="border border-gray-300 px-8 py-2">{{ $produkt->znacka->nazev ?? 'Neznámá značka' }}</td>
+            <td class="border border-gray-300 px-8 py-2">{{ $produkt->material->nazev ?? 'Neznámý materiál' }}</td>
+            <td class="border border-gray-300 px-4 py-2">{{ $produkt->cena }}</td>
+            <td class="border border-gray-300 px-4 py-2">{{ $produkt->description }}</td>
+            <td class="border border-gray-300 px-4 py-2">
+                <button onclick="toggleEdit({{ $produkt->id }})" class="bg-blue-500 p-2 text-white font-bold rounded">Edit</button>
+                <form method="POST" action="{{ route('produkty.destroy', $produkt->id) }}" style="display: inline;">
                     @csrf
                     @method('delete')
-                <td class="border border-gray-300 px-4 py-2"><button class="bg-orange-500 p-2 text-white font-bold rounded ">Edit</button>
-                <button class="bg-red-500 p-2 text-white font-bold rounded ">Delete</button></td>
-                
-            </form>
-            </tr>
-        @endforeach
-    @endif
-</tbody>
+                    <button class="bg-red-500 p-2 text-white font-bold rounded">Delete</button>
+                </form>
+            </td>
+        </tr>
 
-                    </table>
+        <tr id="edit-row-{{ $produkt->id }}" style="display: none;">
+
+            <form id="edit-form-{{ $produkt->id }}" method="POST" action="{{ route('produkty.update', $produkt->id) }}">
+                @csrf
+                @method('patch')
+                <div class="">
+                    <td class="border border-gray-300 px-4 py-2">
+                        <input type="text" name="kod" value="{{ $produkt->kod }}" class="w-full px-2 py-1 border border-gray-300">
+                    </td>
+                    <td class="border border-gray-300 px-4 py-2">
+                        <input type="text" name="nazev" value="{{ $produkt->nazev }}" class="w-full px-2 py-1 border border-gray-300">
+                    </td>
+                    <td class="border border-gray-300 px-4 py-2">
+                        <select name="znacka_id" class="border border-gray-300 px-8 py-2">
+                            @foreach($znacky as $znacka)
+                            <option value="{{ $znacka->id }}" {{ $produkt->znacka_id == $znacka->id ? 'selected' : '' }}>{{ $znacka->nazev }}</option>
+                            @endforeach
+                        </select>
+                    </td>
+                    <td class="border border-gray-300 px-4 py-2">
+                        <select name="material_id" class="border border-gray-300 px-8 py-2">
+                            @foreach($materialy as $material)
+                            <option value="{{ $material->id }}" {{ $produkt->material_id == $material->id ? 'selected' : '' }}>{{ $material->nazev }}</option>
+                            @endforeach
+                        </select>
+                    </td>
+                    <td class="border border-gray-300 px-4 py-2">
+                        <input type="number" name="cena" value="{{ $produkt->cena }}" class="w-full px-2 py-1 border border-gray-300">
+                    </td>
+                    <td class="border border-gray-300 px-4 py-2">
+                        <input name="description" value="{{ $produkt->description }} " class="w-full px-2 py-1 border border-gray-300">
+                    </td>
+                    <td class="flex content-center">
+                        
+                            <button type="submit" class="bg-green-500 p-2 m-2 text-white font-bold rounded">Uložit</button>
+                            <button type="button" onclick="toggleEdit({{ $produkt->id }})" class="bg-gray-500 p-2 m-2 text-white font-bold rounded">Zrušit</button>
+                        
+                    </td>
+                </div>
+            </form>
+
+        </tr>
+        @endforeach
+        @endif
+    </tbody>
+</table>
+
+<script>
+    function toggleEdit(id) {
+        var row = document.getElementById('row-' + id);
+        var editRow = document.getElementById('edit-row-' + id);
+        if (editRow.style.display === 'none') {
+            row.style.display = 'none';
+            editRow.style.display = 'table-row';
+        } else {
+            row.style.display = '';
+            editRow.style.display = 'none';
+        }
+    }
+</script>

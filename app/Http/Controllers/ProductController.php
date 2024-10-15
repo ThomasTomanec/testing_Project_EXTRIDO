@@ -31,4 +31,12 @@ class ProductController extends Controller
         Produkty::where('id',$id)->firstOrFail()->delete();
         return redirect()->route('dashboard')->with('success', 'Produkt byl odstraněn!');
     }
+
+    public function update(Request $request, $id)
+    {
+        $produkty = Produkty::findOrFail($id);
+        $produkty->update($request->all());
+
+        return redirect()->back()->with('success', 'Produkt byl úspěšně aktualizován');
+    }
 }

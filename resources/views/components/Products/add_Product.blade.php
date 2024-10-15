@@ -4,8 +4,8 @@
         <tr class="bg-gray-200">
             <th class="border border-gray-300 px-4 py-2">kod</th>
             <th class="border border-gray-300 px-4 py-2">Název produktu</th>
-            <th class="border border-gray-300 px-4 py-2">Značka</th>
-            <th class="border border-gray-300 px-4 py-2">Materiál</th>
+            <th class="border border-gray-300 px-8 py-2">Značka</th>
+            <th class="border border-gray-300 px-8 py-2">Materiál</th>
             <th class="border border-gray-300 px-4 py-2">Cena</th>
             <th class="border border-gray-300 px-4 py-2">Popis produktu</th>
             <th class="border border-gray-300 px-4 py-2">Akce</th>
@@ -21,18 +21,18 @@
                 <td class="border border-gray-300 px-4 py-2">
                     <input type="text" name="nazev" class="w-full px-2 py-1 border border-gray-300">
                 </td>
-                <td class="border border-gray-300 px-4 py-2">
-                    <select name="znacky_id" class="w-full px-2 py-1 border border-gray-300">
-                        <option value="">Vyberte značku</option>
+                <td class="border border-gray-300 px-8 py-2">
+                    <select name="znacky_id" class="w-full px-8 py-1 border border-gray-300">
+                        <option value="">Vyberte</option>
 
                         @foreach ($znacky as $znacka)
                             <option value="{{ $znacka->id }}">{{ $znacka->nazev }}</option>
                         @endforeach
                     </select>
                 </td>
-                <td class="border border-gray-300 px-4 py-2">
-                    <select name="materialy_id" class="w-full px-2 py-1 border border-gray-300">
-                        <option value="">Vyberte material</option>
+                <td class="border border-gray-300 px-8 py-2">
+                    <select name="materialy_id" class="w-full px-8 py-1 border border-gray-300">
+                        <option value="">Vyberte</option>
 
                         @foreach ($materialy as $material)
                             <option value="{{ $material->id }}">{{ $material->nazev }}</option>

@@ -10,10 +10,13 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
 
                 <div class="p-6 text-gray-900">
-                @include('components.products.alert_TableProduct')
-
-                @include('components.products.add_Product')
-                @include('components.products.product_Table')
+                    @include('components.products.alert_TableProduct')
+                    <div>
+                        @include('components.products.add_Product')
+                    </div>
+                    <div class="pt-10">
+                        @include('components.products.product_Table')
+                    </div>
                 </div>
             </div>
         </div>
