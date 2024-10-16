@@ -7,6 +7,6 @@
 <script>
     setTimeout(() => {
         const alert = document.getElementById('alert');
-        alert.classList.add('opacity-0'); // Přidání třídy pro skrytí
-    }, 3000); // 3000 ms = 3 sekundy
+        alert.classList.add('opacity-0');
+    }, 3000); 
 </script>

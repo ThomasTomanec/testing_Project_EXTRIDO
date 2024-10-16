@@ -15,6 +15,7 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+Route::get('/produkty', [ProduktController::class, 'index'])->name('produkty.index');
 Route::post('/produkty', [ProductController::class, 'store'])->name('produkty.create');
 Route::delete('/produkty/{id}', [ProductController::class, 'destroy'])->name('produkty.destroy');
 Route::get('/produkty/{id}/edit', [ProductController::class, 'edit'])->name('produkty.edit');
