@@ -1,15 +1,18 @@
 <head>
-        <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
-        <!-- Styles -->
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+
         <link rel="stylesheet" href="{{ mix('css/app.css') }}">
         <script src="{{ mix('js/app.js') }}" defer></script>
 </head>
-<header class="bg-white">
-    <div class="hidden md:flex justify-around items-center text-md">
-        <div>
-            <p>+420 xxx xxx xxx</p>
+<header class="font-custom">
+
+    <div class="hidden md:flex justify-around items-center text-md bg-gradient-to-t h-10 from-gray-200 to-white">
+        <div class="flex items-center space-x-2">
+        <svg aria-hidden="true" focusable="false" class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="1em" height="1em" fill="red"><path d="M493.4 24.6l-104-24c-11.3-2.6-22.9 3.3-27.5 13.9l-48 112c-4.2 9.8-1.4 21.3 6.9 28l60.6 49.6c-36 76.7-98.9 140.5-177.2 177.2l-49.6-60.6c-6.8-8.3-18.2-11.1-28-6.9l-112 48C3.9 366.5-2 378.1.6 389.4l24 104C27.1 504.2 36.7 512 48 512c256.1 0 464-207.5 464-464 0-11.2-7.7-20.9-18.6-23.4z"/></svg>
+            <p class="text-lg font-bold">+420 000 000 000</p>
         </div>
         <div>
             @if (Route::has('login'))
@@ -29,9 +32,10 @@
             @endif
         </div>
     </div>
-    <div class="flex justify-around items-center text-lg h-[50px]" >
+
+    <div class="flex justify-around items-center text-lg h-[50px] bg-rose-600  text-white" >
         <div>
-            <h1 class="uppercase font-bold">Testovací cvičení</h1>
+            <h1 class="uppercase font-bold">Kryty pod motor</h1>
         </div>
         <div>
             <ul class="hidden md:flex">
