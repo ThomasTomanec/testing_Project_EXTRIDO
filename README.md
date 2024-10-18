@@ -14,12 +14,16 @@ Jedná se o aplikaci, která uchovává, zobrazuje a mění informace o produkte
 - Produkty lze také filtrovat, seřazovat a také stáhnout jejich seznam v podobě csv závislé na jejich filtraci a seřazení. 
 
 ## Instalace
-git clone https://github.com/uzivatel/jmeno_projektu.git
-cd jmeno_projektu
+git clone https://github.com/thomastomanec/testing_Project_EXTRIDO.git
+
+cd testing_Project_EXTRIDO
+
 npm install
 
 php artisan migrate
+
 php artisan db:seed
+
 php artisan migrate:fresh --seed
 
 php artisan serve
