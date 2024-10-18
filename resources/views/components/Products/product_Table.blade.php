@@ -1,3 +1,4 @@
+<div>
 <table class="min-w-full mt-4 border border-gray-300">
     <thead>
         <tr class="bg-gray-200">
@@ -22,7 +23,7 @@
             <td class="border border-gray-300 px-4 py-2">{{ $produkt->nazev }}</td>
             <td class="border border-gray-300 px-8 py-2">{{ $produkt->znacka->nazev ?? 'Neznámá značka' }}</td>
             <td class="border border-gray-300 px-8 py-2">{{ $produkt->material->nazev ?? 'Neznámý materiál' }}</td>
-            <td class="border border-gray-300 px-4 py-2">{{ $produkt->cena }}</td>
+            <td class="border border-gray-300 px-4 py-2">{{ number_format($produkt->cena, 2) }} Kč</td>
             <td class="border border-gray-300 px-4 py-2">{{ $produkt->description }}</td>
             <td class="border border-gray-300 px-4 py-2">
             <button onclick="toggleEdit({{ $produkt->id }})" class="bg-blue-500 p-2 text-white font-bold rounded">Edit</button>
@@ -38,5 +39,5 @@
 @endif
 </tbody>
 </table>
-
-
+<div class="float-right text-blue-700 underline">        @include('components.products.export_Csv')</div>
+</div>
