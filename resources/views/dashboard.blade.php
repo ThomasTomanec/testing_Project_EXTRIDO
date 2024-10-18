@@ -8,17 +8,23 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-
                 <div class="p-6 text-gray-900 space-y-2">
                     @include('components.products.alert_TableProduct')
                     <div class="">
-                    <h3 class="text-lg font-semibold py-3">Seznam produktů</h3>
+                        <h3 class="text-lg font-semibold py-3">Seznam produktů</h3>
                     </div>
                     <div class="">
                         @include('components.products.filtration_Bar')
                         @include('components.products.add_Product')
-                        @include('components.products.product_Table')
+                        <div>
+                            <div class="float-right text-blue-700 underline"> @include('components.products.export_Csv')</div>
+                            @include('components.products.product_Table')
+                        </div>
                     </div>
+                    <div class="mt-4">
+                        {{ $produkty->links() }}
+                    </div>
+
                 </div>
             </div>
         </div>
