@@ -15,12 +15,13 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+Route::get('/dashboard/export', [DashboardController::class, 'export'])->name('dashboard.export');
+
 Route::get('/produkty', [ProductController::class, 'index'])->name('produkty.index');
 Route::post('/produkty', [ProductController::class, 'store'])->name('produkty.create');
 Route::delete('/produkty/{id}', [ProductController::class, 'destroy'])->name('produkty.destroy');
 Route::get('/produkty/{id}/edit', [ProductController::class, 'edit'])->name('produkty.edit');
 Route::patch('/produkty/{id}', [ProductController::class, 'update'])->name('produkty.update'); 
-
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

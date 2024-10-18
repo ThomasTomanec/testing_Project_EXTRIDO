@@ -1,6 +1,6 @@
 @if(isset($filters) && count($filters) > 0)
     <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
-        <strong class="font-bold">Aktivní filtry:</strong>
+        <strong class="font-bold">Aktivní filtry: </strong>
         <ul class="list-disc pl-6">
             @if(isset($filters['search']))
                 <li>
